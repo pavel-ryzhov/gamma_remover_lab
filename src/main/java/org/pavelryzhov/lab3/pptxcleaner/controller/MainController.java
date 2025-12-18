@@ -23,7 +23,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = { "http://localhost:8080", "http://127.0.0.1:8080" })
 public class MainController {
     private final PptxCleanerService cleanerService;
     private final UserStatRepository userStatRepository;
@@ -96,18 +96,6 @@ public class MainController {
                 .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.presentationml.presentation"))
                 .contentLength(result.data().length)
                 .body(resource);
-    }
-
-    @GetMapping("/about")
-    public String getAboutInfo() {
-        return """
-                {
-                  "author": "Student",
-                  "why_java_docker": "Java обеспечивает переносимость (WORA), а Docker изолирует окружение, избавляя от проблем 'на моем компьютере работает'.",
-                  "why_hate_windows": "Windows навязывает экосистему, потребляет много ресурсов и имеет сложный реестр. Linux дает свободу и контроль.",
-                  "teacher_interests": "Java, Spring, DevOps и, возможно, качественные мемы."
-                }
-                """;
     }
 
     @DeleteMapping("/presets/{id}")
